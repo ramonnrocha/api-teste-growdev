@@ -1,6 +1,17 @@
 # Variables
 @baseUrl = http://localhost:3333
 
+# Login
+# @name login
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com"
+}
+
+###
+
 # Health check
 # @name healthCheck
 GET {{baseUrl}}/health
