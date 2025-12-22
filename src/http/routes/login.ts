@@ -63,6 +63,7 @@ export const loginRoute: FastifyPluginCallbackZod = (app) => {
 			return res.send({
 				token,
 				roomId: room.id,
+				userId: user.id,
 			});
 		},
 	);

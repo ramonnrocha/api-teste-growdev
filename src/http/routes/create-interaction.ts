@@ -14,7 +14,7 @@ export const createInteractionRoute: FastifyPluginCallbackZod = (app) => {
 					roomId: z.string(),
 				}),
 				body: z.object({
-					prompt: z.string().min(10),
+					prompt: z.string().min(1),
 				}),
 			},
 		},
