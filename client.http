@@ -36,21 +36,26 @@ Content-Type: application/json
 
 ###
 
-@roomId = {{createRoom.response.body.$.roomId}}
+@roomId = bbc11a50-33f4-4aab-b783-cbb16c81fd19
 
 ###
 
-# Get room questions
-# @name getRoomQuestions
-GET {{baseUrl}}/rooms/{{roomId}}/questions
-
-###
-
-# Create question
-# @name createQuestion
-POST {{baseUrl}}/rooms/{{roomId}}/questions
+# Create interaction
+# @name createInteraction
+POST {{baseUrl}}/rooms/{{roomId}}/interactions
 Content-Type: application/json
 
 {
-  "question": "Qual o conceito de X dentro de Y?"
+  "prompt": "Qual o conceito de X dentro de Y?"
 }
+
+
+###
+
+# Get room interactions
+# @name getRoomInteractions
+GET {{baseUrl}}/rooms/{{roomId}}/interactions
+###
+# Get room questions
+# @name getRoomQuestions
+GET {{baseUrl}}/rooms/{{roomId}}/questions

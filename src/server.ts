@@ -7,8 +7,8 @@ import {
 	type ZodTypeProvider,
 } from "fastify-type-provider-zod";
 import { env } from "./env.ts";
-import { createQuestionRoute } from "./http/routes/create-question.ts";
-import { getRoomQuestionsRoute } from "./http/routes/get-room-questions.ts";
+import { createInteractionRoute } from "./http/routes/create-interaction.ts";
+import { getRoomInteractionsRoute } from "./http/routes/get-room-interactions.ts";
 import { getRoomsRoute } from "./http/routes/get-rooms.ts";
 import { loginRoute } from "./http/routes/login.ts";
 
@@ -32,8 +32,8 @@ app.get("/health", () => {
 //  Routes HTTP
 app.register(loginRoute);
 app.register(getRoomsRoute);
-app.register(getRoomQuestionsRoute);
-app.register(createQuestionRoute);
+app.register(getRoomInteractionsRoute);
+app.register(createInteractionRoute);
 
 app.listen({ port: env.PORT }).then(() => {
 	console.log(`Server is running!`);

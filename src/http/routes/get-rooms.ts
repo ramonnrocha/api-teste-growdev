@@ -1,21 +1,23 @@
-import { count, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import type { FastifyPluginCallbackZod } from "fastify-type-provider-zod";
 import { db } from "../../db/connection.ts";
 import { schema } from "../../db/schema/index.ts";
 
 export const getRoomsRoute: FastifyPluginCallbackZod = async (app) => {
-	app.get("/rooms", async (req, res) => {
-		const rooms = await db
-			.select({
-				id: schema.rooms.id,
-				name: schema.rooms.name,
-				questionCount: count(schema.questions.id),
-			})
-			.from(schema.rooms)
-			.leftJoin(schema.questions, eq(schema.questions.roomId, schema.rooms.id))
-			.groupBy(schema.rooms.id, schema.rooms.name)
-			.orderBy(schema.rooms.createdAt);
+  app.get("/rooms/:userId", async (req, res) => {
+    const { userId } = req.params as { userId: string };
 
-		return res.status(200).send(rooms);
-	});
+    const rooms = await db
+      .select({
+        id: schema.rooms.id,
+        description: schema.rooms.description,
+        createdAt: schema.rooms.createdAt,
+      })
+      .from(schema.rooms)
+      .where(eq(schema.rooms.userId, userId))
+      .groupBy(schema.rooms.id, schema.rooms.description)
+      .orderBy(desc(schema.rooms.createdAt));
+
+    return res.status(200).send(rooms);
+  });
 };

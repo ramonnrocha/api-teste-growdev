@@ -1,11 +1,11 @@
 {
-	"id": "a2967185-51a4-4780-ba57-87ae6a58dcf6",
+	"id": "0fffda28-35b4-4ebb-a0fe-fdae4b09c44d",
 	"prevId": "00000000-0000-0000-0000-000000000000",
 	"version": "7",
 	"dialect": "postgresql",
 	"tables": {
-		"public.questions": {
-			"name": "questions",
+		"public.interactions": {
+			"name": "interactions",
 			"schema": "",
 			"columns": {
 				"id": {
@@ -21,14 +21,26 @@
 					"primaryKey": false,
 					"notNull": true
 				},
-				"question": {
-					"name": "question",
+				"parent_interaction_id": {
+					"name": "parent_interaction_id",
+					"type": "uuid",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"gemini_interaction_id": {
+					"name": "gemini_interaction_id",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"prompt": {
+					"name": "prompt",
 					"type": "text",
 					"primaryKey": false,
 					"notNull": true
 				},
-				"answer": {
-					"name": "answer",
+				"response": {
+					"name": "response",
 					"type": "text",
 					"primaryKey": false,
 					"notNull": false
@@ -43,13 +55,22 @@
 			},
 			"indexes": {},
 			"foreignKeys": {
-				"questions_room_id_rooms_id_fk": {
-					"name": "questions_room_id_rooms_id_fk",
-					"tableFrom": "questions",
+				"interactions_room_id_rooms_id_fk": {
+					"name": "interactions_room_id_rooms_id_fk",
+					"tableFrom": "interactions",
 					"tableTo": "rooms",
 					"columnsFrom": ["room_id"],
 					"columnsTo": ["id"],
 					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"interactions_parent_interaction_id_interactions_id_fk": {
+					"name": "interactions_parent_interaction_id_interactions_id_fk",
+					"tableFrom": "interactions",
+					"tableTo": "interactions",
+					"columnsFrom": ["parent_interaction_id"],
+					"columnsTo": ["id"],
+					"onDelete": "set null",
 					"onUpdate": "no action"
 				}
 			},
@@ -73,12 +94,6 @@
 				"user_id": {
 					"name": "user_id",
 					"type": "uuid",
-					"primaryKey": false,
-					"notNull": true
-				},
-				"name": {
-					"name": "name",
-					"type": "text",
 					"primaryKey": false,
 					"notNull": true
 				},

@@ -3,14 +3,13 @@ import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { users } from "./users.ts";
 
 export const rooms = pgTable("rooms", {
-	id: uuid("id").primaryKey().defaultRandom(),
+  id: uuid("id").primaryKey().defaultRandom(),
 
-	userId: uuid("user_id")
-		.notNull()
-		.references(() => users.id, { onDelete: "cascade" }),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
 
-	name: text("name").notNull(),
-	description: text("description"),
+  description: text("description"),
 
-	createdAt: timestamp("created_at").notNull().defaultNow(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
