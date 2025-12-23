@@ -1,60 +1,97 @@
-Clone ChatAI – API
+# Clone ChatAI - API
 
 Projeto desenvolvido para teste de vaga na empresa Growdev.
 
-📋 Sobre
+## 📋 Sobre
 
-A Clone ChatAI API é uma API REST desenvolvida em Node.js com TypeScript, responsável pelo gerenciamento de salas de chat, autenticação e persistência de dados.
-Ela serve como backend para a aplicação web Clone ChatAI.
+Projeto desenvolvido para teste de vaga na empresa Growdev. API REST desenvolvida em Node.js com TypeScript para gerenciamento de salas de chat.
 
-🛠️ Tecnologias
-Core
+## 🛠️ Tecnologias
 
-Node.js – Ambiente de execução JavaScript
+### Core
 
-TypeScript – Tipagem estática e maior segurança no desenvolvimento
+- **Fastify** - Framework web rápido e eficiente 
+- **Drizzle ORM** - ORM type-safe para PostgreSQL 
+- **PostgreSQL** - Banco de dados relacional (com pgvector) 
+- **Zod** - Validação de schemas e tipos 
+- **TypeScript** - Tipagem estática 
+- **Biome** - Linter e formatter 
+- **Docker** - Containerização do banco de dados
 
-Fastify – Framework web rápido e eficiente
+### Banco de Dados
 
-Banco de Dados
+- **PostgreSQL* Banco de dados relacional
+- **TanStack React Query** 5.90.12 - Gerenciamento de estado de servidor e cache
 
-PostgreSQL – Banco de dados relacional
+## 🏗️ Padrões de Projeto
 
-pgvector – Extensão para suporte a vetores
+- **Type Providers** - Validação de tipos em tempo de execução com Zod 
+- **Modularização** - Rotas organizadas em módulos separados 
+- **Validação de Ambiente** - Variáveis de ambiente validadas com Zod 
+- **Type-Safe Database** - Queries type-safe com Drizzle ORM 
+- **CORS** - Configurado para desenvolvimento local
 
-Drizzle ORM – ORM type-safe para PostgreSQL
+## 🚀 Setup e Instalação
 
-Validação e Tipagem
+### Pré-requisitos
 
-Zod – Validação de schemas e tipos em tempo de execução
+- Node.js (versão 22 ou superior)
+- npm ou yarn
 
-Fastify Type Providers – Integração de validação com tipagem
 
-Ferramentas de Desenvolvimento
+### Instalação 
 
-Biome – Linter e formatter
+1. Clone o repositório
+ 
+bash 
+  - git clone <url-do-repositorio>
 
-Docker – Containerização do banco de dados
+2. Instale as dependências:
 
-Docker Compose – Orquestração de containers
+bash
+  - npm install
 
-🏗️ Padrões de Projeto
+3. Configure as variáveis de ambiente criando um arquivo .env:
 
-Modularização – Rotas organizadas por domínio
+env
+ - PORT=3333
+ - NODE_ENV=development
+ - DATABASE_URL=postgresql://docker:docker@localhost:5432/chat-api
+ 
+4. Inicie o banco de dados com Docker:
 
-Type-Safe Database – Queries tipadas com Drizzle ORM
+bash
+ - docker-compose up -d
 
-Validação de Ambiente – Variáveis de ambiente validadas com Zod
+5. Execute as migrations (se necessário):
 
-Separation of Concerns – Camadas bem definidas
+bash
+ - npx drizzle-kit migrate
+ 
+## 📜 Scripts Disponíveis
 
-CORS – Configurado para ambiente de desenvolvimento
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Inicia o servidor em produção
+- `npm run db:generate` - Cria as tabelas do banco de Dados quando ainda não existem
+- `npm run db:migrate` - Inicia as migrates do Banco de dados no serviço atual(Docker
 
-🚀 Setup e Instalação
-Pré-requisitos
 
-Node.js (versão com suporte a --experimental-strip-types)
+## 📁 Estrutura do Projeto
 
-Docker e Docker Compose
+```
+src/
+├── db/                 # Configuração do banco de dados
+│   ├── schema/         # Schemas do Drizzle ORM
+│   └── migrations/     # Migrations do banco
+├── http/
+│   └── routes/         # Rotas da API
+├── env.ts              # Validação das variáveis de ambiente
+└── server.ts           # Configuração do servidor Fastify
 
-npm
+```
+
+## ⚙️ Configuração
+
+- **CORS**: Habilitado para desenvolvimento local
+- **Environment Validation**: Centralizada em env.ts
+- **Banco de Dados:**: PostgreSQL gerenciado via Docker
